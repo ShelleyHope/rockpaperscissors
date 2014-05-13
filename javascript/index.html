@@ -1,0 +1,112 @@
+<!doctype>
+<html>
+  <head>
+    <title>Rock Paper Scissors Izzard Sock</title>
+    <style>
+    body {
+      font-family: 'Helvetica Neue';
+      margin: 15px 0 0 30px;
+      color: FF9999;
+    }
+    
+    .choices .choice {
+      display: inline-block;
+      width: 15%;
+      margin-right: 2.5%;
+      cursor: pointer;
+      opacity: 0.5;
+      transition: 1s all ease;
+    }
+
+    .choices img:hover {
+      opacity: 1;
+    }
+
+    .choices h2 {
+      text-align: center;
+      color: #000000;
+    }
+
+    h2, h3 {
+      text-transform: capitalize;
+    }
+
+    #results {
+      list-style: none;
+    }
+
+    #results li {
+      background: #999;
+      color: #fff;
+      font-size: 24px;
+      border-radius: 8px;
+      padding: 5px;
+      width: 80%;
+      margin-bottom: 10px;
+      display: none;
+    }
+
+    #results li.gamewinner {
+      background: #00FF00;
+    }
+    
+    </style>
+  </head>
+  <body>
+    <h1>Click Your Pick!</h1>
+    <div class='choices'>
+      <div class='choice'>
+        <h2>Rock</h2>
+        <img src="images/rock.jpeg" data-pick='rock' width="150">
+      </div>
+      
+      <div class='choice'>
+        <h2>Paper</h2>
+        <img src="images/paper.jpg" data-pick='paper' width="150">
+      </div>
+
+      <div class='choice'>
+        <h2>Scissors</h2>
+        <img src="images/scissors.jpg" data-pick='scissors' width="150">
+      </div>
+
+      <div class='choice'>
+        <h2>Izzard</h2>
+        <img src="images/izzard.jpeg" data-pick='izzard' width="150">
+      </div>
+
+      <div class='choice'>
+        <h2>Sock</h2>
+        <img src="images/sock.jpeg" data-pick='sock' width="150">
+      </div>
+    </div>
+    <ul id="results">
+    </ul>
+
+    <script src='lib/Player.js'></script>
+    <script src='lib/Game.js'></script>
+    <script src='http://code.jquery.com/jquery-2.1.1.min.js'></script>
+    <script>
+      $(document).ready(function(){
+        var your = new Player('Your');
+        var computers = new Player("Computer's");
+        var game = new Game(your, computers)
+        
+        $('.choices img').on('click', function(){
+          your.picks($(this).data('pick'));
+          computers.randomPicks();
+          $('#results').prepend('<li>' + game.winningMessage() + '</li>');
+          $('#results li').slideDown(1000);
+          $('li:nth-child(5)').fadeOut(1000, function(){
+            $(this).remove();
+          })
+
+          if(game.winner() === your) {
+           $('#results li').addClass('gamewinner')
+            console.log('You won!')
+           }
+        })
+      })
+    </script>
+  </body>
+</html>

@@ -1,7 +1,7 @@
 Rock, Paper, Scissors
 
 <!-- ![pic](https://raw.github.com/shelleyhope/rockpaperscissors/master/screenshot.png) -->
-![pic](.screenshot.png " ")
+![pic](./screenshot.png " ")
 
 Makers Week 7 Exercise:
 
